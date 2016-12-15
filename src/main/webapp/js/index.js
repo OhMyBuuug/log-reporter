@@ -19,7 +19,7 @@ $(function () {
     };
     websocket.onclose = function () {
         alert("Closed");
-    }
+    };
 
     // 接收到信息后执行
     websocket.onmessage = function (message) {
