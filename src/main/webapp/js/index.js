@@ -14,12 +14,12 @@ $(function () {
     // websocket.onopen = function () {
     //     // alert("Connected successfully");
     // };
-    // websocket.onerror = function () {
-    //     alert("Error");
-    // };
-    // websocket.onclose = function () {
-    //     alert("Closed");
-    // }
+    websocket.onerror = function () {
+        alert("Error");
+    };
+    websocket.onclose = function () {
+        alert("Closed");
+    }
 
     // 接收到信息后执行
     websocket.onmessage = function (message) {
