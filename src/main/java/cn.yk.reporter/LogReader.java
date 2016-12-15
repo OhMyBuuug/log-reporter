@@ -17,7 +17,7 @@ public class LogReader extends Thread {
     private boolean tailing = false;
     // 从文件尾部读取的字节数
     private int lastBytesOfLogFile = 10000;
-    // 当文件没有变化时，再次读取该文件需要等待的时间(ms)
+    // 当文件没有变化时，再次读取该文件需要等待的时间 ( ms )
     private int waitTime = 1000;
     // 获取 LogReporter 的 session 对象
     private Session session;
