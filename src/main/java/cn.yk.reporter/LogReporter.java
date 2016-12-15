@@ -1,5 +1,8 @@
 package cn.yk.reporter;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+
 import javax.websocket.*;
 import javax.websocket.server.ServerEndpoint;
 import java.io.File;
@@ -29,7 +32,7 @@ public class LogReporter {
      * "/deploy/tomcatForProvider/logs/catalina.out"
      * "C:\\apache-tomcat-8.0.30\\logs\\catalina.out"
      */
-    private String logFileRoot = "C:\\apache-tomcat-8.0.30\\logs\\catalina.out";
+    private String logFileRoot = "/deploy/tomcatForProvider/logs/catalina.out";
 
     // websocket 连接成功时，记录 session 信息，并且 为其准备一个 logreader
     @OnOpen
