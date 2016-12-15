@@ -23,6 +23,12 @@ public class LogReporter {
     private LogReader logReader;
     // 获得当前系统时间
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    /**
+     * 待读取的文件路径
+     * "/deploy/tomcatForProvider/logs/catalina.out"
+     * "C:\\apache-tomcat-8.0.30\\logs\\catalina.out"
+     */
+    private String logFileRoot = "C:\\apache-tomcat-8.0.30\\logs\\catalina.out";
 
     // websocket 连接成功时，记录 session 信息，并且 为其准备一个 logreader
     @OnOpen
@@ -30,19 +36,19 @@ public class LogReporter {
         // 记录 session 信息
         sessionMap.put(session.getId(), session);
 
-        System.out.println("[ " + simpleDateFormat.format(new Date()) + "] -> Welcome , " + session.getId());
+        System.out.println("[ " + simpleDateFormat.format(new Date()) + " ] -> Welcome , " + session.getId());
 
         // 从 指定文件中获取内容，并开始读取，初始化session
         // "/deploy/tomcatForProvider/logs/catalina.out"
         // "C:\\apache-tomcat-8.0.30\\logs\\catalina.out"
-        this.logReader = new LogReader(new File("C:\\apache-tomcat-8.0.30\\logs\\catalina.out"), true, session);
+        this.logReader = new LogReader(new File(logFileRoot), true, session);
         logReader.start();
     }
 
     // websocket 关闭连接时，清理 session 信息
     @OnClose
     public void OnClose(Session session, CloseReason closeReason) {
-        System.out.println("[ " + simpleDateFormat.format(new Date()) + " ] ->" + session.getId() + " is closed beacuseof " + closeReason);
+        System.out.println("[ " + simpleDateFormat.format(new Date()) + " ] -> " + session.getId() + " is closed beacuseof " + closeReason);
         // 清理信息
         Clear(session);
     }
@@ -50,7 +56,7 @@ public class LogReporter {
     // websocket 连接错误时，记录错误，并清理 session 信息
     @OnError
     public void OnError(Session session, Throwable throwable) {
-        System.err.println("[ " + simpleDateFormat.format(new Date()) + "] ->" + session.getId() + " error : " + throwable.toString());
+        System.err.println("[ " + simpleDateFormat.format(new Date()) + " ] -> " + session.getId() + " error : " + throwable.toString());
         // 清理信息
         Clear(session);
     }
@@ -77,6 +83,6 @@ public class LogReporter {
         // 通知 logReader 结束读取文件
         logReader.setTailing(false);
 
-        System.out.println("[ " + simpleDateFormat.format(new Date()) + "] -> " + session.getId() + " session 清理成功");
+        System.out.println("[ " + simpleDateFormat.format(new Date()) + " ] -> " + session.getId() + " session 清理成功");
     }
 }

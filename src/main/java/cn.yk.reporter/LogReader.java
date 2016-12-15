@@ -15,6 +15,10 @@ public class LogReader extends Thread {
     private File logFile;
     // 判断是否 继续读取 的标志
     private boolean tailing = false;
+    // 从文件尾部读取的字节数
+    private int lastBytesOfLogFile = 10000;
+    // 当文件没有变化时，再次读取该文件需要等待的时间
+    private int waitTime;
     // 获取 LogReporter 的 session 对象
     private Session session;
     // 获得当前系统时间
@@ -44,9 +48,9 @@ public class LogReader extends Thread {
             // 以只读方式读取 logfile
             randomAccessFile = new RandomAccessFile(logFile, "r");
 
-            // 当 logfile 字节数大于 10,000 时，只读取文件的最后 10,000 个字节
-            if (this.logFile.length() > 100000) {
-                filePointer = this.logFile.length() - 100000;
+            // 当 logfile 字节数大于 lastBytesOfLogFile 时，只读取文件的最后 lastBytesOfLogFile 个字节
+            if (this.logFile.length() > lastBytesOfLogFile) {
+                filePointer = this.logFile.length() - lastBytesOfLogFile;
             }
 
             //当 tailing 为 true 时 ，执行 按行读取文件到 websocket 的任务
@@ -85,7 +89,7 @@ public class LogReader extends Thread {
                     filePointer = randomAccessFile.getFilePointer();
                 } else if (fileLength == filePointer) {
                     // 当文件没有变化时，等待两秒
-                    sleep(2000);
+                    sleep(waitTime);
                 } else if (fileLength < filePointer) {
                     // 当 当前文件大小 小于 filePointer 时，说明文件内容被删除部分，将重置filePointer，以从头读取文件
                     randomAccessFile = new RandomAccessFile(logFile, "r");
@@ -104,7 +108,7 @@ public class LogReader extends Thread {
             try {
                 // 当任务执行结束后，释放读取文件的线程
                 randomAccessFile.close();
-                System.out.println("[ " + simpleDateFormat.format(new Date()) + " ] ->" + session.getId() + "已停止读取文件");
+                System.out.println("[ " + simpleDateFormat.format(new Date()) + " ] -> " + session.getId() + " 已停止读取文件");
             } catch (IOException e) {
                 e.printStackTrace();
             }
