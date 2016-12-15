@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="log-reporter:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/log_reporter_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="log-reporter" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.websocket:javax.websocket-api:1.1" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="log-reporter/web/Web" />
+    </root>
+  </artifact>
+</component>
