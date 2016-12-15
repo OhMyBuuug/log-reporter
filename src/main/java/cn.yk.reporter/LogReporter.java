@@ -23,6 +23,7 @@ public class LogReporter {
     private LogReader logReader;
     // 获得当前系统时间
     private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
     /**
      * 待读取的文件路径
      * "/deploy/tomcatForProvider/logs/catalina.out"
@@ -70,7 +71,7 @@ public class LogReporter {
     public static void Report(String message, Session session) {
         try {
             // 向 session 发送 信息
-            session.getBasicRemote().sendText("{text :'" + message + "'}");
+            session.getBasicRemote().sendText("{text :'" +""+ message + "'}");
         } catch (IOException e) {
             e.printStackTrace();
         }
