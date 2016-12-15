@@ -11,7 +11,7 @@ import java.util.Map;
 
 /**
  * Created by SiGen on 2016/12/14.
- *
+ * <p>
  * 发送信息实体类
  */
 @ServerEndpoint(value = "/reporter")

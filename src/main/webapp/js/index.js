@@ -4,7 +4,7 @@
 $(function () {
     // 格式化对象
     function parseObject(stringData) {
-        return (new Function( "return" + stringData))();
+        return (new Function("return" + stringData))();
     }
 
     //建立到指定 url 的 websocket

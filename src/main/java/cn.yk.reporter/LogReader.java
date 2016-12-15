@@ -7,7 +7,7 @@ import java.util.Date;
 
 /**
  * Created by SiGen on 2016/12/14.
- *
+ * <p>
  * 读取文件实体类
  */
 public class LogReader extends Thread {
@@ -18,7 +18,7 @@ public class LogReader extends Thread {
     // 从文件尾部读取的字节数
     private int lastBytesOfLogFile = 10000;
     // 当文件没有变化时，再次读取该文件需要等待的时间
-    private int waitTime;
+    private int waitTime = 1000;
     // 获取 LogReporter 的 session 对象
     private Session session;
     // 获得当前系统时间
