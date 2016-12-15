@@ -26,8 +26,7 @@ $(function () {
         // 将接收到的信息格式化
         var data = parseObject(message.data);
         // 接收服务器端的实时日志并添加到HTML页面中
-        // alert(data.text);
-        $("#logs").append("<span style='display:inline-block;white-space:nowrap'>" + data.text + "</span>");
+        $("#logs").append("<br><span style='display:inline-block;white-space: nowrap'>" + data.text + "</span>");
         // 滚动条滚动到最底部
         $("#log-container").scrollTop(
             $("#logs").height() - $("#log-container").height()
