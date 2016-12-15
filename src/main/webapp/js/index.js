@@ -8,8 +8,8 @@ $(function () {
     }
 
     //建立到指定 url 的 websocket
-    var websocket = new WebSocket("ws://10.10.8.82:8380/log-reporter/reporter");
-    // var websocket = new WebSocket("ws://127.0.0.1:8180/reporter");
+    // var websocket = new WebSocket("ws://10.10.8.82:8380/log-reporter/reporter");
+    var websocket = new WebSocket("ws://127.0.0.1:8080/reporter");
 
     // websocket.onopen = function () {
     //     // alert("Connected successfully");
